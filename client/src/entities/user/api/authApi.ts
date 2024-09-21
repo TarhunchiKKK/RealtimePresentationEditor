@@ -1,7 +1,7 @@
 import { useState } from "react";
+import axios, { AxiosResponse } from "axios";
 import { TLoginQueryArgs } from "../types";
 import { IUser } from "../model";
-import axios, { AxiosResponse } from "axios";
 
 export const authApi = {
     useLoginMutation: () => {

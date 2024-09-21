@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TLoginQueryArgs } from "../types";
 import { IUser } from "../model";
 
 export const usersApi = createApi({
@@ -9,25 +8,19 @@ export const usersApi = createApi({
         baseUrl: `${import.meta.env.VITE_SERVER_URL}/api/users`,
     }),
 
+    tagTypes: ["User"],
+
     endpoints: (builder) => ({
-        login: builder.mutation<IUser, TLoginQueryArgs>({
-            query: (queryArgs: TLoginQueryArgs) => {
-                const formData = new FormData();
-
-                formData.append("nickname", queryArgs.nickname);
-                if (queryArgs.avatar) {
-                    formData.append("avatar", queryArgs.avatar);
-                }
-
-                return {
-                    url: "",
-                    method: "POST",
-                    body: { formData },
-                    headers: {
-                        "Content-Type": "multipart/form-data;",
-                    },
-                };
-            },
+        getAllUsers: builder.query<IUser[], void>({
+            query: () => ({
+                url: "",
+            }),
+            providesTags: ["User"],
+        }),
+        getUserById: builder.query<IUser, string>({
+            query: (userId: string) => ({
+                url: `/${userId}`,
+            }),
         }),
     }),
 });
