@@ -18,7 +18,7 @@ export const authApi = {
                 }
 
                 const response = await axios.post<void, AxiosResponse<IUser>>(
-                    `${import.meta.env.VITE_SERVER_URL}/users`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/users`,
                     formData,
                     {
                         headers: {

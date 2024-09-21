@@ -6,7 +6,7 @@ export const usersApi = createApi({
     reducerPath: "users/api",
 
     baseQuery: fetchBaseQuery({
-        baseUrl: `${import.meta.env.VITE_SERVER_URL}/users`,
+        baseUrl: `${import.meta.env.VITE_SERVER_URL}/api/users`,
     }),
 
     endpoints: (builder) => ({

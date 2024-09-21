@@ -31,7 +31,7 @@ export function useLoginForm() {
         const { data: user } = await login({ nickname, avatar });
         if (user) {
             userSlice.actions.setUser(user);
-            navigate(routes.Home);
+            navigate(routes.Projects);
         }
     };
 

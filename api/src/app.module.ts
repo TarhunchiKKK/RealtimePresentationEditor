@@ -5,6 +5,9 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/entities/user.entity";
 import { FilesModule } from "./files/files.module";
+import { ServeStaticModule } from "@nestjs/serve-static";
+import * as path from "path";
+import { StaticFilesDir } from "./shared/constants/files";
 
 @Module({
     imports: [
@@ -26,6 +29,10 @@ import { FilesModule } from "./files/files.module";
                 synchronize: true,
                 entities: [User],
             }),
+        }),
+        ServeStaticModule.forRoot({
+            rootPath: path.resolve(__dirname, StaticFilesDir),
+            exclude: ["/api/(.*)"],
         }),
     ],
     controllers: [AppController],
