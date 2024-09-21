@@ -1,4 +1,4 @@
-import { ActionsOnThePresentation } from "src/presentations/enums/actions-on-the-presentation.enum";
+import { ActionsOnThePresentation } from "src/projects/enums/actions-on-the-presentation.enum";
 import { Roles } from "../enums/roles.enum";
 
 export const RoleDependentActions: Record<Roles, ActionsOnThePresentation[]> = {

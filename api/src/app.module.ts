@@ -8,18 +8,18 @@ import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { StaticFilesDir } from "./shared/constants/files";
 import { RolesModule } from "./roles/roles.module";
-import { PresentationsModule } from "./presentations/presentations.module";
+import { ProjectsModule } from "./projects/projects.module";
 import * as path from "path";
-import { Presentation } from "./presentations/entities/presentation.entity";
-import { Slide } from "./presentations/entities/slide.entity";
-import { UserRoleOnPresentation } from "./presentations/entities/user-role-on-presentation.entity";
+import { Presentation } from "./projects/entities/presentation.entity";
+import { Slide } from "./projects/entities/slide.entity";
+import { UserRoleOnPresentation } from "./projects/entities/user-role-on-presentation.entity";
 
 @Module({
     imports: [
         UsersModule,
         FilesModule,
         RolesModule,
-        PresentationsModule,
+        ProjectsModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),

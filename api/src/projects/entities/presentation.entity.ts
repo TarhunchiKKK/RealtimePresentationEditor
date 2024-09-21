@@ -15,6 +15,6 @@ export class Presentation {
     })
     userRolesOnPresentation: UserRoleOnPresentation[];
 
-    @OneToMany(() => Slide, (slide: Slide) => slide.presentation, { cascade: true })
+    @OneToMany(() => Slide, (slide: Slide) => slide.presentation, { onDelete: "NO ACTION" })
     slides: Slide[];
 }

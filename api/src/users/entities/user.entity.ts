@@ -1,4 +1,4 @@
-import { UserRoleOnPresentation } from "src/presentations/entities/user-role-on-presentation.entity";
+import { UserRoleOnPresentation } from "src/projects/entities/user-role-on-presentation.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

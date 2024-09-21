@@ -6,6 +6,8 @@ export class Slide {
     @PrimaryGeneratedColumn("uuid")
     id: string;
 
-    @ManyToOne(() => Presentation, (presentation: Presentation) => presentation.slides)
+    @ManyToOne(() => Presentation, (presentation: Presentation) => presentation.slides, {
+        onDelete: "SET NULL",
+    })
     presentation: Presentation;
 }

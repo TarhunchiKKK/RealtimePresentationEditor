@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { RolePair } from "./entities/role-pair.entity";
 import { Roles } from "./enums/roles.enum";
-import { ActionsOnThePresentation } from "src/presentations/enums/actions-on-the-presentation.enum";
+import { ActionsOnThePresentation } from "src/projects/enums/actions-on-the-presentation.enum";
 import { RoleDependentActions } from "./constants/role-dependent-actions";
 
 @Injectable()
