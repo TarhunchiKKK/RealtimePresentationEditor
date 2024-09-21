@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserRoleOnPresentation } from "src/projects/entities/user-role-on-presentation.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -10,4 +11,9 @@ export class User {
 
     @Column({ nullable: true })
     avatar: string;
+
+    @ManyToOne(() => UserRoleOnPresentation, (role: UserRoleOnPresentation) => role.user, {
+        cascade: true,
+    })
+    rolesOnPresentations: UserRoleOnPresentation[];
 }

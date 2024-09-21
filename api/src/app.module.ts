@@ -6,13 +6,20 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/entities/user.entity";
 import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
-import * as path from "path";
 import { StaticFilesDir } from "./shared/constants/files";
+import { RolesModule } from "./roles/roles.module";
+import { ProjectsModule } from "./projects/projects.module";
+import * as path from "path";
+import { Presentation } from "./projects/entities/presentation.entity";
+import { Slide } from "./projects/entities/slide.entity";
+import { UserRoleOnPresentation } from "./projects/entities/user-role-on-presentation.entity";
 
 @Module({
     imports: [
         UsersModule,
         FilesModule,
+        RolesModule,
+        ProjectsModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
@@ -27,7 +34,7 @@ import { StaticFilesDir } from "./shared/constants/files";
                 password: configService.get("DB_PASSWORD"),
                 database: configService.get("DB_NAME"),
                 synchronize: true,
-                entities: [User],
+                entities: [User, Presentation, Slide, UserRoleOnPresentation],
             }),
         }),
         ServeStaticModule.forRoot({
