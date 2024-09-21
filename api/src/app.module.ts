@@ -4,12 +4,15 @@ import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/entities/user.entity";
-import { FilesModule } from './files/files.module';
+import { FilesModule } from "./files/files.module";
 
 @Module({
     imports: [
         UsersModule,
-        ConfigModule.forRoot({ isGlobal: true }),
+        FilesModule,
+        ConfigModule.forRoot({
+            isGlobal: true,
+        }),
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             inject: [ConfigService],
@@ -24,7 +27,6 @@ import { FilesModule } from './files/files.module';
                 entities: [User],
             }),
         }),
-        FilesModule,
     ],
     controllers: [AppController],
 })
