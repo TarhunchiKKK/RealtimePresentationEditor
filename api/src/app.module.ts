@@ -6,13 +6,17 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/entities/user.entity";
 import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
-import * as path from "path";
 import { StaticFilesDir } from "./shared/constants/files";
+import { RolesModule } from "./roles/roles.module";
+import { PresentationsModule } from "./presentations/presentations.module";
+import * as path from "path";
 
 @Module({
     imports: [
         UsersModule,
         FilesModule,
+        RolesModule,
+        PresentationsModule,
         ConfigModule.forRoot({
             isGlobal: true,
         }),
