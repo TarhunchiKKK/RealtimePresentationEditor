@@ -4,6 +4,7 @@ import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { User } from "./users/entities/user.entity";
+import { FilesModule } from './files/files.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { User } from "./users/entities/user.entity";
                 entities: [User],
             }),
         }),
+        FilesModule,
     ],
     controllers: [AppController],
 })
