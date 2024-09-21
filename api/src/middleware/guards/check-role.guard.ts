@@ -7,7 +7,7 @@ import { MissingPermissionsException } from "src/shared/exceptions/missing-permi
 import { ProvidesAction } from "../decorators/provides-action";
 
 @Injectable()
-export class ChackRoleGuard implements CanActivate {
+export class CheckRoleGuard implements CanActivate {
     constructor(
         private readonly reflector: Reflector,
         private readonly rolesService: RolesService,
@@ -26,6 +26,10 @@ export class ChackRoleGuard implements CanActivate {
 
         const presentationId = headers[PresentationIdHeader] as string;
         const userId = headers[UserIdHeader] as string;
+
+        if (!presentationId || !userId) {
+            throw new MissingPermissionsException();
+        }
 
         const userRole = await this.usersRolesService.findOne(presentationId, userId);
 

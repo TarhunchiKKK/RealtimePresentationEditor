@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from "@nestjs/common";
 import { PresentationsService } from "./services/presentations.service";
 import { CreatePresentationDto } from "./dto/create-presentation.dto";
 import { SlidesService } from "./services/slides.service";
@@ -7,8 +7,12 @@ import { Roles } from "src/roles/enums/roles.enum";
 import { CreateSlideDto } from "./dto/create-slide.dto";
 import { CreateUserRoleDto } from "./dto/create-user-role.dto";
 import { UpdateUserRoleDto } from "./dto/update-user-role.dto";
+import { ProvidesAction } from "src/middleware/decorators/provides-action";
+import { ActionsOnThePresentation } from "./enums/actions-on-the-presentation.enum";
+import { CheckRoleGuard } from "src/middleware/guards/check-role.guard";
 
 @Controller("projects")
+@UseGuards(CheckRoleGuard)
 export class ProjectsController {
     constructor(
         private readonly presentationsService: PresentationsService,
@@ -45,6 +49,7 @@ export class ProjectsController {
         return await this.presentationsService.findOne(presentationId);
     }
 
+    @ProvidesAction(ActionsOnThePresentation.RemovePresentation)
     @Delete("/presentations/:id")
     public async removePresentation(@Param("id") presentationId: string) {
         return await this.presentationsService.remove(presentationId);
@@ -52,11 +57,13 @@ export class ProjectsController {
 
     /*----------------------------------Slides-------------------------------------------*/
 
+    @ProvidesAction(ActionsOnThePresentation.CreateSlide)
     @Post("/slides")
     public async createSlide(@Body() createSlideDto: CreateSlideDto) {
         return await this.slidesService.create(createSlideDto);
     }
 
+    @ProvidesAction(ActionsOnThePresentation.RemoveSlide)
     @Delete("/slides/:id")
     public async removeSlide(@Param("id") slideId: string) {
         return await this.slidesService.remove(slideId);
@@ -64,21 +71,25 @@ export class ProjectsController {
 
     /*----------------------------------User Roles-------------------------------------------*/
 
+    // ProvidesAction(???)
     @Post("/roles")
     public async createUserRole(@Body() createUserRoleDto: CreateUserRoleDto) {
         return await this.userRolesService.create(createUserRoleDto);
     }
 
+    @ProvidesAction(ActionsOnThePresentation.ViewUsers)
     @Get("/roles")
     public async findAllUserRoles() {
         return await this.userRolesService.findAll();
     }
 
+    @ProvidesAction(ActionsOnThePresentation.ChangeUserRole)
     @Put("/roles")
     public async updateUserRole(@Body() updateUserRoleDto: UpdateUserRoleDto) {
         return await this.userRolesService.update(updateUserRoleDto);
     }
 
+    // ProvidesAction(???)
     @Delete("/roles/:id")
     public async removeUserRole(@Param("id") userRoleId: string) {
         return await this.userRolesService.remove(userRoleId);

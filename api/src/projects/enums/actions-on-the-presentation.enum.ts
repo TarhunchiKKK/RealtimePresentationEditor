@@ -1,5 +1,6 @@
 export enum ActionsOnThePresentation {
     CreatePresentation = "Create presentation",
+    RemovePresentation = "Remove presentation",
     CreateSlide = "Create slide",
     RemoveSlide = "Remove slide",
     ViewUsers = "View users",

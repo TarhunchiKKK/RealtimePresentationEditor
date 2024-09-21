@@ -4,6 +4,7 @@ import { Roles } from "../enums/roles.enum";
 export const RoleDependentActions: Record<Roles, ActionsOnThePresentation[]> = {
     [Roles.Owner]: [
         ActionsOnThePresentation.CreatePresentation,
+        ActionsOnThePresentation.RemovePresentation,
         ActionsOnThePresentation.CreateSlide,
         ActionsOnThePresentation.RemoveSlide,
         ActionsOnThePresentation.ViewUsers,

@@ -7,9 +7,10 @@ import { Slide } from "./entities/slide.entity";
 import { UserRoleOnPresentation } from "./entities/user-role-on-presentation.entity";
 import { SlidesService } from "./services/slides.service";
 import { UserRolesService } from "./services/user-roles.service";
+import { RolesModule } from "src/roles/roles.module";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Presentation, Slide, UserRoleOnPresentation])],
+    imports: [RolesModule, TypeOrmModule.forFeature([Presentation, Slide, UserRoleOnPresentation])],
     controllers: [ProjectsController],
     providers: [PresentationsService, SlidesService, UserRolesService],
 })
