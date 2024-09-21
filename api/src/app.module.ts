@@ -10,6 +10,9 @@ import { StaticFilesDir } from "./shared/constants/files";
 import { RolesModule } from "./roles/roles.module";
 import { PresentationsModule } from "./presentations/presentations.module";
 import * as path from "path";
+import { Presentation } from "./presentations/entities/presentation.entity";
+import { Slide } from "./presentations/entities/slide.entity";
+import { UserRoleOnPresentation } from "./presentations/entities/user-role-on-presentation.entity";
 
 @Module({
     imports: [
@@ -31,7 +34,7 @@ import * as path from "path";
                 password: configService.get("DB_PASSWORD"),
                 database: configService.get("DB_NAME"),
                 synchronize: true,
-                entities: [User],
+                entities: [User, Presentation, Slide, UserRoleOnPresentation],
             }),
         }),
         ServeStaticModule.forRoot({

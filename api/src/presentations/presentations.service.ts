@@ -1,26 +1,72 @@
-import { Injectable } from '@nestjs/common';
-import { CreatePresentationDto } from './dto/create-presentation.dto';
-import { UpdatePresentationDto } from './dto/update-presentation.dto';
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
+import { CreatePresentationDto } from "./dto/create-presentation.dto";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Presentation } from "./entities/presentation.entity";
+import { Repository } from "typeorm";
+import { UserRoleOnPresentation } from "./entities/user-role-on-presentation.entity";
+import { Roles } from "src/roles/enums/roles.enum";
 
 @Injectable()
 export class PresentationsService {
-  create(createPresentationDto: CreatePresentationDto) {
-    return 'This action adds a new presentation';
-  }
+    constructor(
+        @InjectRepository(Presentation)
+        private readonly presentationsRepository: Repository<Presentation>,
 
-  findAll() {
-    return `This action returns all presentations`;
-  }
+        @InjectRepository(UserRoleOnPresentation)
+        private readonly userRolesRepository: Repository<UserRoleOnPresentation>,
+    ) {}
 
-  findOne(id: number) {
-    return `This action returns a #${id} presentation`;
-  }
+    public async createPresentation(
+        createPresentationDto: CreatePresentationDto,
+    ): Promise<Presentation> {
+        const existPreseentation = await this.presentationsRepository.findOne({
+            where: {
+                title: createPresentationDto.title,
+            },
+        });
 
-  update(id: number, updatePresentationDto: UpdatePresentationDto) {
-    return `This action updates a #${id} presentation`;
-  }
+        if (existPreseentation) {
+            throw new BadRequestException(
+                `Presentation ${createPresentationDto.title} already exists.`,
+            );
+        }
 
-  remove(id: number) {
-    return `This action removes a #${id} presentation`;
-  }
+        const presentation = await this.presentationsRepository.save({
+            title: createPresentationDto.title,
+        });
+
+        await this.userRolesRepository.save({
+            presentation: presentation,
+            user: createPresentationDto.user,
+            role: Roles.Owner,
+        });
+
+        return presentation;
+    }
+
+    public async findAll(): Promise<Presentation[]> {
+        return await this.presentationsRepository.find({
+            relations: {
+                slides: false,
+            },
+        });
+    }
+
+    public async findOneById(id: string) {
+        const presentation = await this.presentationsRepository.findOne({
+            where: {
+                id: id,
+            },
+        });
+
+        if (!presentation) {
+            throw new NotFoundException("Requested presentation not exist.");
+        }
+
+        return presentation;
+    }
+
+    public async remove(id: string) {
+        await this.presentationsRepository.delete(id);
+    }
 }
