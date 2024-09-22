@@ -3,4 +3,6 @@ export enum HotKeys {
     Bold = "b",
     Italic = "i",
     Underlined = "u",
+    Undo = "z",
+    Redo = "y",
 }
