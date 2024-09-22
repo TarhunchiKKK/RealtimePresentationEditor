@@ -1,9 +1,9 @@
 import { KeyboardEventHandler } from "react";
 import { Editor } from "slate";
-import { HotKeys } from "../../types";
-import { hotKeysHandlers } from "../../constants";
+import { hotKeysHandlers } from "../constants";
+import { HotKeys } from "../enums";
 
-export function useHotKeys(editor: Editor) {
+export function useHotKeysHandlers(editor: Editor) {
     const handler: KeyboardEventHandler<HTMLDivElement> = (event) => {
         if (!event.ctrlKey) {
             return;

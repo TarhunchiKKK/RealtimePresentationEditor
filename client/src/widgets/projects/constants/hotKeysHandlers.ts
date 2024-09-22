@@ -1,16 +1,16 @@
 import { Editor, Element, Transforms } from "slate";
-import { HotKeys, TextElementTypes } from "../types";
+import { HotKeys, ElementTypes } from "../types";
 import { HistoryEditor } from "slate-history";
 
 export const hotKeysHandlers: Record<HotKeys, (editor: Editor) => void> = {
     [HotKeys.Code]: (editor: Editor) => {
         const [match] = Editor.nodes(editor, {
-            match: (node) => node.type === TextElementTypes.Code,
+            match: (node) => node.type === ElementTypes.Code,
         });
 
         Transforms.setNodes(
             editor,
-            { type: match ? TextElementTypes.Paragraph : TextElementTypes.Code },
+            { type: match ? ElementTypes.Paragraph : ElementTypes.Code },
             { match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) },
         );
     },

@@ -1,15 +1,17 @@
 import { useCallback } from "react";
-import { TextElementTypes } from "../../types";
-import { CodeElement, Leaf, TextElement } from "../../ui";
+import { ElementTypes } from "../../types";
+import { CodeElement, Leaf, ShapeElement, TextElement } from "../../ui";
 import { RenderElementProps } from "slate-react";
 
 export function useRenderers() {
     const renderElement = useCallback((props: RenderElementProps) => {
         switch (props.element.type) {
-            case TextElementTypes.Code:
+            case ElementTypes.Code:
                 return <CodeElement {...props} />;
-            case TextElementTypes.Paragraph:
+            case ElementTypes.Paragraph:
                 return <TextElement {...props} />;
+            case ElementTypes.Shape:
+                return <ShapeElement {...props} />;
             default:
                 return <TextElement {...props} />;
         }

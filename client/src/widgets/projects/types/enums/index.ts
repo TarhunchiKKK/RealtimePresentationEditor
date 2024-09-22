@@ -1,2 +1,2 @@
-export { TextElementTypes } from "./TextElementTypes";
+export { ElementTypes } from "./ElementTypes";
 export { HotKeys } from "./HotKeys";
