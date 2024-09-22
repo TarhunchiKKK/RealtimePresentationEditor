@@ -1,0 +1,1 @@
+export { useHotKeysHandlers } from "./useHotkeysHandlers";

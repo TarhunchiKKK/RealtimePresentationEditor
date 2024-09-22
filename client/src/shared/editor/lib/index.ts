@@ -1,0 +1,10 @@
+export { setTextColor } from "./setTextColor";
+export { setTextFontFamily } from "./setTextFontFamily";
+export { setTextFontSize } from "./setTextFontSize";
+export { setTextHeading } from "./setTextHeading";
+export { toggleFontStyle } from "./toggleFontStyle";
+export { toggleFontWeight } from "./toggleFontWeight";
+export { toggleTextDecoration } from "./toggleTextDecoration";
+export { setTextTransform } from "./setTextTransform";
+export { redoAction } from "./redoAction";
+export { undoAction } from "./undoAction";

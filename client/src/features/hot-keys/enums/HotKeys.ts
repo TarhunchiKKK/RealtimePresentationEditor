@@ -1,0 +1,17 @@
+export enum HotKeys {
+    Undo = "z",
+    Redo = "y",
+    Bold = "b",
+    Italic = "i",
+    Underlined = "u",
+    Heading1 = "1",
+    Heading2 = "2",
+    Heading3 = "3",
+    Heading4 = "4",
+    Heading5 = "5",
+    Heading6 = "6",
+    MainText = "0",
+    Lowercase = "l",
+    Uppercase = "e",
+    Capitalize = "j",
+}
