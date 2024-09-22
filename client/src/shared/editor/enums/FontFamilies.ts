@@ -2,6 +2,6 @@ export enum FontFamilies {
     SansSerif = "sans-serif",
     Monospace = "monospace",
     Fantasy = "fantasy",
-    Arial = "Aria",
+    Arial = "Arial",
     Verdana = "Verdana",
 }

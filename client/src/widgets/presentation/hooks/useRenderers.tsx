@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { ElementTypes } from "../../types";
-import { CodeElement, Leaf, ShapeElement, TextElement } from "../../ui";
-import { RenderElementProps } from "slate-react";
+import { RenderElementProps, RenderLeafProps } from "slate-react";
+import { ElementTypes } from "../enums";
+import { TextElement, CodeElement, Leaf } from "../ui";
 
 export function useRenderers() {
     const renderElement = useCallback((props: RenderElementProps) => {
@@ -10,14 +10,12 @@ export function useRenderers() {
                 return <CodeElement {...props} />;
             case ElementTypes.Paragraph:
                 return <TextElement {...props} />;
-            case ElementTypes.Shape:
-                return <ShapeElement {...props} />;
             default:
                 return <TextElement {...props} />;
         }
     }, []);
 
-    const renderLeaf = useCallback((props) => {
+    const renderLeaf = useCallback((props: RenderLeafProps) => {
         return <Leaf {...props} />;
     }, []);
 

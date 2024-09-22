@@ -20,13 +20,13 @@ export function Dropdown({ title, value, onChange, options }: IDropdownProps) {
         <button
             title={buttonTitle}
             onClick={handleOpen}
-            className="relative flex flex-row justify-between items-center gap-4 px-2 py-[6px] rounded-md bg-slate-400"
+            className="relative w-32 flex flex-row justify-between items-center gap-4 px-2 py-[6px] rounded-md bg-slate-400"
         >
             <span>{value}</span>
 
             <MdArrowDropDown />
             {isOpen && (
-                <ul className="absolute top-full left-0 w-full bg-slate-200 rounded-md">
+                <ul className="absolute z-10 top-full left-0 w-full bg-slate-200 rounded-md">
                     {options
                         .filter((option) => option.value !== value)
                         .map((option, index) => (

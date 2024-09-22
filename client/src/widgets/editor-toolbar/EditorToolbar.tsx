@@ -6,15 +6,13 @@ import {
     RxLetterCaseCapitalize,
 } from "react-icons/rx";
 import { iconsSize, maxFontSize, minFontSize } from "./constants";
-import { Checkbox, Dropdown, NumericInput, ActionButton } from "./ui";
+import { Checkbox, Dropdown, NumericInput, ActionButton, ColorPicker } from "./ui";
 import { useFonts, useFormatting, useHistory, useTextHeading, useTextTransfoms } from "./hooks";
 
 export function EditorToolbar() {
     const { handleUndoAction, handleRedoAction } = useHistory();
     const { textHeading, textHeadingDropdownOptions, handleChangeTextHeading } = useTextHeading();
     const { handleTextUppercase, handleTextLowercase, handleTextCapitalize } = useTextTransfoms();
-    const { handleToggleFontWeight, handleToggleFontStyle, handleToggleTextDecoration } =
-        useFormatting();
     const {
         fontFamily,
         fontSize,
@@ -22,6 +20,13 @@ export function EditorToolbar() {
         handleFontFamilyChange,
         handleFontSizeChange,
     } = useFonts();
+    const {
+        availableTextColors,
+        handleChangeTextColor,
+        handleToggleFontWeight,
+        handleToggleFontStyle,
+        handleToggleTextDecoration,
+    } = useFormatting();
 
     return (
         <div className="px-4 py-3 rounded-2xl flex flex-row justify-start items-center gap-3 bg-slate-300">
@@ -105,6 +110,12 @@ export function EditorToolbar() {
                     title="capitalize (Ctrl-j)"
                     onCheck={handleTextCapitalize}
                     content={<RxLetterCaseCapitalize size={iconsSize} />}
+                />
+
+                <ColorPicker
+                    title="Color"
+                    onChange={handleChangeTextColor}
+                    colors={availableTextColors}
                 />
             </div>
         </div>

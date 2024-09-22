@@ -1,12 +1,12 @@
 import { EditorContextProvider } from "../../features/editor";
 import { EditorToolbar } from "../../widgets/editor-toolbar";
-import { Slide } from "../../widgets/projects/Slide/Slide";
+import { Presentation } from "../../widgets/presentation";
 
 export function EditorPage() {
-    // return <Slide></Slide>;
     return (
         <EditorContextProvider>
             <EditorToolbar />
+            <Presentation />
         </EditorContextProvider>
     );
 }

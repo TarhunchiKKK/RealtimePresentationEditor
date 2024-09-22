@@ -1,2 +1,2 @@
 export { slateInitialValue } from "./slateInitialValue";
-export { hotKeysHandlers } from "./hotKeysHandlers";
+export { headingStyles } from "./headingStyles";
