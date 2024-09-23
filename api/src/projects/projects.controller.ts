@@ -10,6 +10,7 @@ import { UpdateUserRoleDto } from "./dto/update-user-role.dto";
 import { ProvidesAction } from "src/middleware/decorators/provides-action";
 import { ActionsOnThePresentation } from "./enums/actions-on-the-presentation.enum";
 import { CheckRoleGuard } from "src/middleware/guards/check-role.guard";
+import { SaveSlideDto } from "./dto/save-slide.dto";
 
 @Controller("projects")
 @UseGuards(CheckRoleGuard)
@@ -61,6 +62,11 @@ export class ProjectsController {
     @Post("/slides")
     public async createSlide(@Body() createSlideDto: CreateSlideDto) {
         return await this.slidesService.create(createSlideDto);
+    }
+
+    @Put("/slides")
+    public async saveSlide(@Body() saveSlideDto: SaveSlideDto) {
+        return await this.slidesService.save(saveSlideDto);
     }
 
     @ProvidesAction(ActionsOnThePresentation.RemoveSlide)

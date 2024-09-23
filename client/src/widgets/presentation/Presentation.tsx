@@ -11,7 +11,11 @@ export function Presentation() {
     const { renderElement, renderLeaf } = useRenderers();
 
     return (
-        <Slate editor={editor} initialValue={slateInitialValue}>
+        <Slate
+            editor={editor}
+            initialValue={slateInitialValue}
+            onChange={(value) => console.log(value)}
+        >
             <Editable
                 onKeyDown={handleHotKeys}
                 renderElement={renderElement}
