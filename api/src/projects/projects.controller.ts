@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from "@nestjs/common";
 import { PresentationsService } from "./services/presentations.service";
 import { CreatePresentationDto } from "./dto/create-presentation.dto";
 import { SlidesService } from "./services/slides.service";
@@ -10,6 +10,7 @@ import { UpdateUserRoleDto } from "./dto/update-user-role.dto";
 import { ProvidesAction } from "src/middleware/decorators/provides-action";
 import { ActionsOnThePresentation } from "./enums/actions-on-the-presentation.enum";
 import { CheckRoleGuard } from "src/middleware/guards/check-role.guard";
+import { SaveSlideDto } from "./dto/save-slide.dto";
 
 @Controller("projects")
 @UseGuards(CheckRoleGuard)
@@ -34,14 +35,20 @@ export class ProjectsController {
 
         await this.slidesService.create({
             presentation: presentation,
+            elements: [],
         });
 
         return presentation;
     }
 
     @Get("/presentations")
-    public async findAllPresentations() {
-        return await this.presentationsService.findAll();
+    public async findAllPresentations(@Query("page") page: number, @Query("count") count: number) {
+        return await this.presentationsService.findAll(+page, +count);
+    }
+
+    @Get("/presentations/count")
+    public async getPresentationsCount(@Query("count") count: number) {
+        return await this.presentationsService.getCount(+count);
     }
 
     @Get("/presentations/:id")
@@ -61,6 +68,11 @@ export class ProjectsController {
     @Post("/slides")
     public async createSlide(@Body() createSlideDto: CreateSlideDto) {
         return await this.slidesService.create(createSlideDto);
+    }
+
+    @Put("/slides")
+    public async saveSlide(@Body() saveSlideDto: SaveSlideDto) {
+        return await this.slidesService.save(saveSlideDto);
     }
 
     @ProvidesAction(ActionsOnThePresentation.RemoveSlide)

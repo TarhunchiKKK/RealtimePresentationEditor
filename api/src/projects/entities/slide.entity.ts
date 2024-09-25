@@ -1,4 +1,4 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Presentation } from "./presentation.entity";
 
 @Entity()
@@ -10,4 +10,7 @@ export class Slide {
         onDelete: "SET NULL",
     })
     presentation: Presentation;
+
+    @Column({ array: true, type: "text" })
+    elements: string[];
 }

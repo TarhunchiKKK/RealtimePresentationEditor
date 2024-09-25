@@ -29,11 +29,13 @@ export class PresentationsService {
         });
     }
 
-    public async findAll(): Promise<Presentation[]> {
+    public async findAll(page: number, count: number): Promise<Presentation[]> {
         return await this.presentationsRepository.find({
             relations: {
                 slides: false,
             },
+            skip: page * count,
+            take: count,
         });
     }
 
@@ -56,5 +58,10 @@ export class PresentationsService {
 
     public async remove(id: string) {
         await this.presentationsRepository.delete(id);
+    }
+
+    public async getCount(perPage: number) {
+        const presentationsCount = await this.presentationsRepository.count();
+        return Math.ceil(presentationsCount / perPage);
     }
 }
