@@ -13,7 +13,6 @@ export function useHotKeysHandlers(editor: Editor) {
 
         const key = event.key as HotKeys;
         if (hotKeysHandlers[key]) {
-            console.log(key);
             hotKeysHandlers[key](editor);
         }
     };

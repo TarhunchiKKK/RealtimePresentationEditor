@@ -2,8 +2,10 @@ import { FormEvent, useState } from "react";
 import { authApi, userSlice } from "../../../entities/user";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../../shared/constants";
+import { useDispatch } from "react-redux";
 
 export function useLoginForm() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [login, { isLoading }] = authApi.useLoginMutation();
@@ -30,7 +32,7 @@ export function useLoginForm() {
 
         const { data: user } = await login({ nickname, avatar });
         if (user) {
-            userSlice.actions.setUser(user);
+            dispatch(userSlice.actions.setUser(user));
             navigate(routes.Projects);
         }
     };

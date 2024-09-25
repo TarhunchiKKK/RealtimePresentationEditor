@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Query } from "@nestjs/common";
 import { PresentationsService } from "./services/presentations.service";
 import { CreatePresentationDto } from "./dto/create-presentation.dto";
 import { SlidesService } from "./services/slides.service";
@@ -35,14 +35,20 @@ export class ProjectsController {
 
         await this.slidesService.create({
             presentation: presentation,
+            elements: [],
         });
 
         return presentation;
     }
 
     @Get("/presentations")
-    public async findAllPresentations() {
-        return await this.presentationsService.findAll();
+    public async findAllPresentations(@Query("page") page: number, @Query("count") count: number) {
+        return await this.presentationsService.findAll(+page, +count);
+    }
+
+    @Get("/presentations/count")
+    public async getPresentationsCount(@Query("count") count: number) {
+        return await this.presentationsService.getCount(+count);
     }
 
     @Get("/presentations/:id")

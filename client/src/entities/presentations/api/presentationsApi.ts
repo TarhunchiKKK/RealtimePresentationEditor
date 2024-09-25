@@ -28,6 +28,15 @@ export const presentationsApi = createApi({
             providesTags: ["Presentations"],
         }),
 
+        getPresentationsCount: builder.query<number, number>({
+            query: (perPage: number) => ({
+                url: "/count",
+                params: {
+                    count: perPage,
+                },
+            }),
+        }),
+
         getPresentationById: builder.query<IPresentation, string>({
             query: (presentationId: string) => ({
                 url: `/${presentationId}`,
